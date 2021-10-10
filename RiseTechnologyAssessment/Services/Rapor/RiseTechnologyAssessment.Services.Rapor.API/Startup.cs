@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RiseTechnologyAssessment.Services.Rapor.API.Db;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API
 {
@@ -25,6 +21,11 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<RaporContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("RaporConectionString"))
+            );
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
