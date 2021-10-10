@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RiseTechnologyAssessment.Services.Rapor.API.Db
+namespace RiseTechnologyAssessment.Services.Rapor.API.Models.Db
 {
     public partial class RaporContext : DbContext
     {
@@ -14,7 +14,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Db
             : base(options)
         {
         }
-        public virtual DbSet<RiseTechnologyAssessment.Services.Rapor.API.Db.Rapor> Rapors { get; set; }
+        public virtual DbSet<Models.Db.Rapor> Rapors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +30,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Db
             //modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
 
-            modelBuilder.Entity<RiseTechnologyAssessment.Services.Rapor.API.Db.Rapor>(entity =>
+            modelBuilder.Entity<Models.Db.Rapor>(entity =>
             {
                 entity.ToTable("Rapor");
 

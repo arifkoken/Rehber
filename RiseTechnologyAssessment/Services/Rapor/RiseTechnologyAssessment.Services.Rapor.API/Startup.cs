@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RiseTechnologyAssessment.Services.Rapor.API.Db;
+using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API
 {

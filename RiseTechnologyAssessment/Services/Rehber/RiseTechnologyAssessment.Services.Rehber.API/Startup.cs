@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RiseTechnologyAssessment.Services.Rehber.API.Db;
+using RiseTechnologyAssessment.Services.Rehber.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rehber.API
 {

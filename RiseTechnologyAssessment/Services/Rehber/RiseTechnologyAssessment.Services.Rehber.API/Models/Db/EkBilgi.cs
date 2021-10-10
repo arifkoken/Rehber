@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace RiseTechnologyAssessment.Services.Rehber.API.Db
+namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
 {
     public partial class EkBilgi
     {

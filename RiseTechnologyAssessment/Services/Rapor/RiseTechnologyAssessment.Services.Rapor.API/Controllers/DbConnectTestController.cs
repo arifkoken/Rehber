@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using RiseTechnologyAssessment.Services.Rapor.API.Db;
+using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API.Controllers
 {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RiseTechnologyAssessment.Services.Rapor.API.Db
+namespace RiseTechnologyAssessment.Services.Rapor.API.Models.Db
 {
     public partial class Rapor
     {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RiseTechnologyAssessment.Services.Rapor.API.Db;
+using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API.Migrations
 {
