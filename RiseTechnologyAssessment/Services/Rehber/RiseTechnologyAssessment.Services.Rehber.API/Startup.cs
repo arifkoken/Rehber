@@ -27,7 +27,8 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddEntityFrameworkNpgsql().AddDbContext<RehberContext>(opt =>
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<RehberContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("RehberConectionString")));
         }
 
