@@ -29,7 +29,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EkBilgiTuru")
+                    b.Property<int>("EkBilgiTuruId")
                         .HasColumnType("integer");
 
                     b.Property<int>("KisiId")
@@ -37,7 +37,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EkBilgiTuru");
+                    b.HasIndex("EkBilgiTuruId");
 
                     b.HasIndex("KisiId");
 
@@ -73,8 +73,10 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<int>("Firma")
-                        .HasColumnType("integer");
+                    b.Property<string>("Firma")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<int>("KonumId")
                         .HasColumnType("integer");
@@ -113,7 +115,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                 {
                     b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgiTuru", "EkBilgiTuruNavigation")
                         .WithMany("EkBilgis")
-                        .HasForeignKey("EkBilgiTuru")
+                        .HasForeignKey("EkBilgiTuruId")
                         .HasConstraintName("FK_IletisimBilgisi_IletisimBilgisiTuru")
                         .IsRequired();
 
