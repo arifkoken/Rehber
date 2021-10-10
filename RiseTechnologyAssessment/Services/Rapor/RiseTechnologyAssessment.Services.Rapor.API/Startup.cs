@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete;
 using RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Cosumers;
 using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
 
@@ -22,11 +24,18 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+         
             services.AddControllers();
+
+            services.AddScoped<IRaporService, RaporService>();
+
             services.AddDbContext<RaporContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("RaporConectionString"))
             );
 
+
+     
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<RaporConsumer>().Endpoint(e => { e.Name = "rapor-kuyruk"; });

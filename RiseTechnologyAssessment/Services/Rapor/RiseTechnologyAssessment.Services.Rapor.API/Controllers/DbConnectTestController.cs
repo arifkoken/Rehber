@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API.Controllers
 {
@@ -11,11 +10,10 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Controllers
     public class DbConnectTestController : ControllerBase
     {
 
-        private readonly RaporContext _context;
-        public DbConnectTestController(RaporContext context)
+        private readonly IRaporService _raporService;
+        public DbConnectTestController(IRaporService raporService)
         {
-
-            _context = context;
+            _raporService = raporService;
         }
 
         [HttpGet]
@@ -23,7 +21,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Controllers
         {
            // _context.Rapors.Add(new Db.Rapor(){KonumId=1,KonumAd="Ankara",TalepZamani=DateTime.Now});
            // _context.SaveChanges();
-            return _context.Rapors.Select(x =>x.KonumAd).ToArray();
+           return _raporService.RaporListele();
         }
     }
 }

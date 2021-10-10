@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RiseTechnologyAssessment.Services.Rehber.API.Business.Abstract;
 using RiseTechnologyAssessment.Services.Rehber.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
@@ -10,11 +11,10 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
     [ApiController]
     public class DbConnectTestController : ControllerBase
     {
-        private readonly RehberContext _context;
-        public DbConnectTestController(RehberContext context)
+        private readonly IKisiService _kisiService;
+        public DbConnectTestController(IKisiService kisiService)
         {
-
-            _context = context;
+            _kisiService = kisiService;
         }
 
         [HttpGet]
@@ -22,7 +22,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
         {
             // _context.Konums.Add(new Konum(){Ad="Ankara"});
             // _context.SaveChanges();
-            return _context.Konums.Select(x => x.Ad).ToArray();
+            return _kisiService.KonumListele();
         }
 
     }
