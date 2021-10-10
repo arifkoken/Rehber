@@ -1,0 +1,60 @@
+version: "3.8"
+services: 
+  rehber-db:
+    container_name: Rehber_Postgres_DB
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - rehber-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=P@ssword
+  rehber-rabbitmq:
+    container_name: Rehber_RabbitMq
+    image: rabbitmq:3.8.9-management
+    restart: always
+    hostname: rehberrabbitmq
+    volumes:
+      - rehber-rabbitmq:/var/lib/rabbitmq
+    environment: 
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=P@ssword
+    ports:
+      - 15673:15672
+      - 5673:5672
+    networks: 
+      - rehber-network 
+  rehber-api:
+    container_name: Rehber_Api
+    build: ./Services/Rehber/RiseTechnologyAssessment.Services.Rehber.API
+    restart: always
+    environment: 
+     - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5010:4500
+    networks: 
+      - rehber-network
+    depends_on:
+     - rehber-db
+     - rehber-rabbitmq
+  rapor-api:
+    container_name: Rapor_Api
+    build: ./Services/Rapor/RiseTechnologyAssessment.Services.Rapor.API
+    restart: always
+    environment: 
+     - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5011:4500
+    networks: 
+      - rehber-network
+    depends_on:
+     - rehber-db
+     - rehber-rabbitmq
+volumes: 
+  rehber-db:
+  rehber-rabbitmq:
+networks: 
+  rehber-network:
+    driver: bridge
