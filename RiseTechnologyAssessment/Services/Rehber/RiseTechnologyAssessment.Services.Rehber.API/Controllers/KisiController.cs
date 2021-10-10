@@ -8,7 +8,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
     [ApiController]
     public class KisiController : ControllerBase
     {
-
+        //Todo Temel CRUD İşlemleri yapılacak
         [HttpPost]
         public void Ekle([FromBody] KisiOlusturDto model)
         {
@@ -44,6 +44,9 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
         {
             return new KisiDetayDto() { };
         }
+
+        //Todo Consumer projesinin ihtiyaç duyacağı "KonumaGoreRehberVerileri" isimli Endpoint Eklenecek.
+
 
     }
 }
