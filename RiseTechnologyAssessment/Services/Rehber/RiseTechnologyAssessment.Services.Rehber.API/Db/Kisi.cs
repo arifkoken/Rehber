@@ -14,7 +14,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Db
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
-        public int Firma { get; set; }
+        public string Firma { get; set; }
         public int KonumId { get; set; }
 
         public virtual Konum Konum { get; set; }

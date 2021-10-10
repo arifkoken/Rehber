@@ -6,7 +6,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Db
     {
         public int Id { get; set; }
         public int KisiId { get; set; }
-        public int EkBilgiTuru { get; set; }
+        public int EkBilgiTuruId { get; set; }
         public string Deger { get; set; }
 
         public virtual EkBilgiTuru EkBilgiTuruNavigation { get; set; }

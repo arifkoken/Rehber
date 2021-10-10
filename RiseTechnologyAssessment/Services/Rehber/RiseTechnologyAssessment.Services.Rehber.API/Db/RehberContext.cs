@@ -39,7 +39,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Db
 
                 entity.HasOne(d => d.EkBilgiTuruNavigation)
                     .WithMany(p => p.EkBilgis)
-                    .HasForeignKey(d => d.EkBilgiTuru)
+                    .HasForeignKey(d => d.EkBilgiTuruId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_IletisimBilgisi_IletisimBilgisiTuru");
 
@@ -70,6 +70,11 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Db
                 entity.Property(e => e.Soyad)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Firma)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
 
                 entity.HasOne(d => d.Konum)
                     .WithMany(p => p.Kisis)
