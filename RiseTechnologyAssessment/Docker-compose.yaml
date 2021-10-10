@@ -45,6 +45,10 @@ services:
     restart: always
     environment: 
      - ASPNETCORE_ENVIRONMENT=Development
+     - RabbitMQ_HostName=rehber-rabbitmq
+     - RabbitMQ_VirtualHost=/
+     - RabbitMQ_UserName=user
+     - RabbitMQ_Password=P@ssword
     ports:
       - 5011:4500
     networks: 
