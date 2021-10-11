@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract.ServiceAdapter;
 using RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete;
 using RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Cosumers;
 using RiseTechnologyAssessment.Services.Rapor.API.Models.Db;
@@ -28,7 +29,19 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
          
             services.AddControllers();
 
+
+            services.AddScoped<IRehberServiceAdapter, FakeRehberServiceAdapter>();
             services.AddScoped<IRaporService, RaporService>();
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                );
+            });
+
 
             services.AddDbContext<RaporContext>(
                 options => options.UseSqlServer(Configuration["ConnectionStrings"])
@@ -64,7 +77,10 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
             {
                 app.UseDeveloperExceptionPage();
             }
+          
 
+     
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();

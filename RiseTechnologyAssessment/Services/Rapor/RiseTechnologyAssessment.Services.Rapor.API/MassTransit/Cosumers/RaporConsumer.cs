@@ -1,25 +1,34 @@
 ﻿using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Dto;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract;
+using RiseTechnologyAssessment.Services.Rapor.API.Business.Abstract.ServiceAdapter;
+using RiseTechnologyAssessment.Services.Rapor.API.Models.Dto;
+using RiseTechnologyAssessment.Services.Rapor.API.Models.Dto.MassTransit;
 
 namespace RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Cosumers
-{ 
-    
-    public class RaporConsumer : IConsumer<RaporMessage>
-    {
+{
 
-        ILogger<RaporConsumer> _logger;
-        public RaporConsumer(ILogger<RaporConsumer> logger)
+    public class RaporConsumer : IConsumer<RaporMessageDto>
+    {
+        readonly ILogger<RaporConsumer> _logger;
+        readonly IRehberServiceAdapter _rehberServiceAdapter;
+        readonly IRaporService _raporService;
+        public RaporConsumer(ILogger<RaporConsumer> logger,
+            IRehberServiceAdapter rehberServiceAdapter,
+            IRaporService raporService)
         {
             _logger = logger;
+            _rehberServiceAdapter = rehberServiceAdapter;
+            _raporService = raporService;
         }
 
-        public async Task Consume(ConsumeContext<RaporMessage> context)
+        public async Task Consume(ConsumeContext<RaporMessageDto> context)
         {
-            _logger.LogInformation("Value: {Id}", context.Message.Id);
-            //Todo Rehber uygulamasının KonumaGöreKişiler Endpointine request at
-            //Todo Update edilecek talep bul ve verileri güncelle
+            _logger.LogInformation("Value: {Id}", context.Message.KonumId);
+
+            KonumaGoreRaporDto konumaGoreRaporDto = _rehberServiceAdapter.KonumaGoreRapor(context.Message.RaporId, context.Message.KonumId);
+            _raporService.RaporOlustur(konumaGoreRaporDto);
         }
     }
 }

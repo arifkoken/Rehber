@@ -4,7 +4,7 @@ services:
     container_name: Rehber_Postgres_DB
     image: postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - rehber-postgresql-db:/var/lib/postgresql/data
     environment:
@@ -23,9 +23,9 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=P@ssword
     ports: 
-      - "1434:1433"
+      - "1433:1433"
     networks: 
-      - rapor-network 
+      - rehber-network 
   rehber-rabbitmq:
     container_name: Rehber_RabbitMq
     image: rabbitmq:3.8.9-management
@@ -37,10 +37,10 @@ services:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=P@ssword
     ports:
-      - 15673:15672
-      - 5673:5672
+      - 15672:15672
+      - 5672:5672
     networks: 
-      - rapor-network 
+      - rehber-network 
   rehber-api:
     container_name: Rehber_Api
     build: ./Services/Rehber/RiseTechnologyAssessment.Services.Rehber.API
@@ -60,7 +60,7 @@ services:
     restart: always
     environment: 
      - ASPNETCORE_ENVIRONMENT=Production
-     - ConnectionStrings=Server=rapor-mssql-db;Database=DevelopmentRapor;User ID=sa;Password=P@ssword
+     - ConnectionStrings=Server=localhost;Database=DevelopmentRapor;User ID=sa;Password=P@ssword
      - RabbitMQ_HostName=rehber-rabbitmq
      - RabbitMQ_VirtualHost=/
      - RabbitMQ_UserName=user
@@ -68,7 +68,7 @@ services:
     ports:
       - 5011:4500
     networks: 
-      - rapor-network
+      - rehber-network
     depends_on:
      - rapor-mssql-db
      - rehber-rabbitmq
@@ -79,5 +79,4 @@ volumes:
 networks: 
   rehber-network:
     driver: bridge
-  rapor-network:
-    driver: bridge
+

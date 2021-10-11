@@ -3,6 +3,6 @@
     public class RaporTalepDto
     {
         public int KonumId { get; set; }
-        public int KonumAd { get; set; }
+        public string KonumAd { get; set; }
     }
 }

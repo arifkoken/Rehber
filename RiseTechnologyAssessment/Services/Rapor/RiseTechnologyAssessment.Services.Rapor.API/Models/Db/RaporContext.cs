@@ -8,19 +8,20 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Models.Db
     {
         public RaporContext()
         {
+      
         }
 
         public RaporContext(DbContextOptions<RaporContext> options)
             : base(options)
         {
         }
-        public virtual DbSet<Models.Db.Rapor> Rapors { get; set; }
+        public virtual DbSet<RiseTechnologyAssessment.Services.Rapor.API.Models.Db.Rapor> Rapors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-       
+                //optionsBuilder.UseSqlServer("Server=localhost;Database=DevelopmentRehberApp;User ID=sa; Password=P@ssword");
             }
         }
 
@@ -30,7 +31,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Models.Db
             //modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
 
-            modelBuilder.Entity<Models.Db.Rapor>(entity =>
+            modelBuilder.Entity<RiseTechnologyAssessment.Services.Rapor.API.Models.Db.Rapor>(entity =>
             {
                 entity.ToTable("Rapor");
 
