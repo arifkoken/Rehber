@@ -34,7 +34,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
 
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<RehberContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("RehberConectionString")));
+                opt.UseNpgsql(Configuration["ConnectionStrings"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

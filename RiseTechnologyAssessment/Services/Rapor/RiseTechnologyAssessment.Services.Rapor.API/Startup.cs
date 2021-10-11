@@ -31,7 +31,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
             services.AddScoped<IRaporService, RaporService>();
 
             services.AddDbContext<RaporContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("RaporConectionString"))
+                options => options.UseSqlServer(Configuration["ConnectionStrings"])
             );
 
 
