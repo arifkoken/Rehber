@@ -7,6 +7,6 @@
         public string Soyad { get; set; }
         public string Firma { get; set; }
         public int KonumId { get; set; }
-        public int Konum { get; set; }
+        public string Konum { get; set; }
     }
 }
