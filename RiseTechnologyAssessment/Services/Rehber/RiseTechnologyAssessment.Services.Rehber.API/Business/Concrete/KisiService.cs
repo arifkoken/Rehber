@@ -136,7 +136,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Business.Concrete
      
         public IDataResult<KonumaGoreRaporDto> KonumaGoreRehberVerileri(int raporId, int konumId)
         {
-            var kisiler = _context.Kisis.Include(x=>x.EkBilgis).Include(x=>x.Konum).Where(x => x.KonumId == konumId);
+            var kisiler = _context.Kisis.Include(x=>x.EkBilgis).Include(x=>x.Konum).Where(x => x.KonumId == konumId && x.SilindiMi==false);
            var TopKisiSayisi = kisiler.Count();
            var ToplamTelefonNoSayisi = kisiler.Sum(x =>
                x.EkBilgis.Count(y => y.SilindiMi == false && y.EkBilgiTuruId == EkBilgiTuruTypes.Telefon));
