@@ -75,13 +75,14 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
             var rapor = _context.Rapors.FirstOrDefault(x => x.Id == id);
             if (rapor == null)
             {
-                return new ErrorDataResult<RaporDetayDto>(Messages.NotFounted, 404);
+                //Todo Hata Turünün düzenlenmesi gerekiyor. Üst Katmanda kullanılmadı
+                return new ErrorDataResult<RaporDetayDto>(Messages.NotFound, 403);
             }
 
             if (rapor.OlusturmaZamani == null)
             {
-                //Todo Hata Turünün düzenlenmesi gerekiyor.
-                return new ErrorDataResult<RaporDetayDto>(Messages.NotReady, 404);
+                //Todo Hata Turünün düzenlenmesi gerekiyor. Üst Katmanda kullanılmadı
+                return new ErrorDataResult<RaporDetayDto>(Messages.NotReady, 403);
             }
 
             var result = new RaporDetayDto()
