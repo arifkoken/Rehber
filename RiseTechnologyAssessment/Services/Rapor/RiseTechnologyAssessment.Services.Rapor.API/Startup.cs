@@ -24,7 +24,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IRehberServiceAdapter, FakeRehberServiceAdapter>();
+            services.AddScoped<IRehberServiceAdapter, RehberServiceAdapter>();
             services.AddScoped<IRaporService, RaporService>();
             services.AddCors(c =>
             {
