@@ -36,7 +36,8 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Business.Concrete
             _context.Add(kisiAdd);
             _context.SaveChanges();
             //Todo Konum Adı Ekle ,HttpResponse codunu düzenle
-            return new SuccessDataResult<KisiBilgiDto>(new KisiBilgiDto() {Id=kisiAdd.Id,Ad=kisiAdd.Ad,Soyad=kisiAdd.Soyad,Firma=kisiAdd.Firma,KonumId=kisiAdd.KonumId }, Messages.Added, 201);
+            var konumAd = _context.Konums.FirstOrDefault(x => x.Id == kisiOlusturDto.KonumId).Ad;
+            return new SuccessDataResult<KisiBilgiDto>(new KisiBilgiDto() {Id=kisiAdd.Id,Ad=kisiAdd.Ad,Soyad=kisiAdd.Soyad,Firma=kisiAdd.Firma,KonumId=kisiAdd.KonumId,Konum=konumAd }, Messages.Added, 201);
         }
 
         public IResult KisiSil(int kisiId)
