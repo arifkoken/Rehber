@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RiseTechnologyAssessment.Services.Rehber.API.Db;
+using RiseTechnologyAssessment.Services.Rehber.API.Business.Abstract;
+using RiseTechnologyAssessment.Services.Rehber.API.Business.Concrete;
+using RiseTechnologyAssessment.Services.Rehber.API.Models.Db;
 
 namespace RiseTechnologyAssessment.Services.Rehber.API
 {
@@ -27,9 +29,21 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IKisiService, KisiService>();
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                );
+            });
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<RehberContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("RehberConectionString")));
+                opt.UseNpgsql(Configuration["ConnectionStrings"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +54,8 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();
