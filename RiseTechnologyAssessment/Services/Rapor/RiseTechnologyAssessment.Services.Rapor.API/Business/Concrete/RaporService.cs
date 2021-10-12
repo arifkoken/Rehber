@@ -23,7 +23,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
 
         public IDataResult<RaporMessageDto> TalepOlustur(RaporTalepDto raporTalepDto)
         {
-            //Todo Db'ye kaydedememe ve kuyruga atamama istisnai durumları değerlendirilmesi gerekiyor.
+
             var rapor = new Models.Db.Rapor { KonumId = raporTalepDto.KonumId, KonumAd = raporTalepDto.KonumAd, TalepZamani = DateTime.Now };
             _context.Add(rapor);
             _context.SaveChanges();
@@ -32,6 +32,8 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
 
         }
 
+
+
         public IResult RaporOlustur(KonumaGoreRaporDto konumaGoreRaporDto)
         {
             var findResult = _context.Rapors.FirstOrDefault(x => x.Id == konumaGoreRaporDto.RaporId);
@@ -39,7 +41,6 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
             {
                 return new ErrorResult();
             }
-
             findResult.ToplamKisiSayisi = konumaGoreRaporDto.TopKisiSayisi;
             findResult.ToplamTelefonNoSayisi = konumaGoreRaporDto.ToplamTelefonNoSayisi;
             findResult.OlusturmaZamani = DateTime.Now;
@@ -49,22 +50,20 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
 
         public IDataResult<ApiListResponseDto<RaporListDto>> Listele()
         {
-            var orderedList = _context.Rapors.OrderByDescending(x => x.Id).Take(100).ToList();
-            var UserInfoDtoListe = orderedList.Select(x => new RaporListDto()
+            // Todo Filtreleme özelliği olmadığı için Take(100) kısıtı kaldırılacak.
+            var orderedList = _context.Rapors.OrderByDescending(x => x.Id).Take(100).ToList().Select(x => new RaporListDto()
             {
                 RaporId = x.Id,
                 TalepZamani = x.TalepZamani,
                 Durum = x.OlusturmaZamani == null ? "Hazırlanıyor" : "Tamamlandı"
 
-            }); ;
-
+            });
 
             var apiResponseList = new ApiListResponseDto<RaporListDto>()
             {
-                Count = UserInfoDtoListe.Count(),
-                Lists = UserInfoDtoListe.ToList()
+                Count = orderedList.Count(),
+                Lists = orderedList.ToList()
             };
-
 
             return apiResponseList.Count < 1 ?
                 new SuccessDataResult<ApiListResponseDto<RaporListDto>>(Messages.ListEmpty) :
@@ -76,13 +75,14 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.Business.Concrete
             var rapor = _context.Rapors.FirstOrDefault(x => x.Id == id);
             if (rapor == null)
             {
-                return new ErrorDataResult<RaporDetayDto>(Messages.NotFounted, 404);
+                //Todo Hata Turünün düzenlenmesi gerekiyor. Üst Katmanda kullanılmadı
+                return new ErrorDataResult<RaporDetayDto>(Messages.NotFound, 403);
             }
 
             if (rapor.OlusturmaZamani == null)
             {
-                //Todo Hata Turünün düzenlenmesi gerekiyor.
-                return new ErrorDataResult<RaporDetayDto>(Messages.NotReady, 404);
+                //Todo Hata Turünün düzenlenmesi gerekiyor. Üst Katmanda kullanılmadı
+                return new ErrorDataResult<RaporDetayDto>(Messages.NotReady, 403);
             }
 
             var result = new RaporDetayDto()

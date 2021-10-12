@@ -4,7 +4,7 @@
     {
         public static string Added = "Başarılı bir şekilde kaydedildi.";
         public static string ListEmpty = "Liste boş.";
-        public static string NotFounted = "Kayıt bulunamadı.";
+        public static string NotFound = "Kayıt bulunamadı.";
         public static string NotReady = "Rapor Hazırlanma Aşamasında.";
     }
 }
