@@ -25,7 +25,7 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Cosumers
 
         public async Task Consume(ConsumeContext<RaporMessageDto> context)
         {
-            _logger.LogInformation("Value: {Id}", context.Message.KonumId);
+            _logger.LogInformation("KonumId: {Id}", context.Message.KonumId +" olarak başarılı bir şekildi geldi.");
 
             var konumaGoreRaporDto = _rehberServiceAdapter.KonumaGoreRapor(context.Message.RaporId, context.Message.KonumId);
             _raporService.RaporOlustur(konumaGoreRaporDto.Result);
