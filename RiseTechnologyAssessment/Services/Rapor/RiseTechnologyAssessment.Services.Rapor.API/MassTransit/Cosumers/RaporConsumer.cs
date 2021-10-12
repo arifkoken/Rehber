@@ -27,8 +27,8 @@ namespace RiseTechnologyAssessment.Services.Rapor.API.MassTransit.Cosumers
         {
             _logger.LogInformation("Value: {Id}", context.Message.KonumId);
 
-            KonumaGoreRaporDto konumaGoreRaporDto = _rehberServiceAdapter.KonumaGoreRapor(context.Message.RaporId, context.Message.KonumId);
-            _raporService.RaporOlustur(konumaGoreRaporDto);
+            var konumaGoreRaporDto = _rehberServiceAdapter.KonumaGoreRapor(context.Message.RaporId, context.Message.KonumId);
+            _raporService.RaporOlustur(konumaGoreRaporDto.Result);
         }
     }
 }
