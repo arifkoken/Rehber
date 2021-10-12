@@ -32,6 +32,15 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
 
             services.AddScoped<IKisiService, KisiService>();
 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                );
+            });
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<RehberContext>(opt =>
                 opt.UseNpgsql(Configuration["ConnectionStrings"]));
@@ -45,6 +54,8 @@ namespace RiseTechnologyAssessment.Services.Rehber.API
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseCors("AllowOrigin");
             app.UseRouting();
 
             app.UseAuthorization();

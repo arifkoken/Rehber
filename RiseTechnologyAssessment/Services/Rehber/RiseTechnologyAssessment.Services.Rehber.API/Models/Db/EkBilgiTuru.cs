@@ -10,7 +10,6 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
         {
             EkBilgis = new HashSet<EkBilgi>();
         }
-
         public int Id { get; set; }
         public string Ad { get; set; }
 

@@ -9,12 +9,10 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
         public RehberContext()
         {
         }
-
         public RehberContext(DbContextOptions<RehberContext> options)
             : base(options)
         {
         }
-
         public virtual DbSet<EkBilgi> EkBilgis { get; set; }
         public virtual DbSet<EkBilgiTuru> EkBilgiTurus { get; set; }
         public virtual DbSet<Kisi> Kisis { get; set; }
@@ -24,7 +22,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
         {
             if (!optionsBuilder.IsConfigured)
             {
-            
+               // optionsBuilder.UseSqlServer("Server=localhost;Database=DevelopmentRehberApp;User ID=sa; Password=P@ssword");
             }
         }
 
@@ -74,7 +72,6 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
                 entity.Property(e => e.Firma)
                     .IsRequired()
                     .HasMaxLength(250);
-
 
                 entity.HasOne(d => d.Konum)
                     .WithMany(p => p.Kisis)

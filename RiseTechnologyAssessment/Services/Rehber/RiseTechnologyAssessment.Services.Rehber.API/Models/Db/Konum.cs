@@ -10,10 +10,8 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
         {
             Kisis = new HashSet<Kisi>();
         }
-
         public int Id { get; set; }
         public string Ad { get; set; }
-
         public virtual ICollection<Kisi> Kisis { get; set; }
     }
 }

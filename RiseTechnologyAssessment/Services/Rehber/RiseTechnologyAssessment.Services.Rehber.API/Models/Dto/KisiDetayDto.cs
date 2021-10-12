@@ -9,7 +9,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Dto
         public string Soyad { get; set; }
         public string Firma { get; set; }
         public int KonumId { get; set; }
-        public int KonumAd { get; set; }
-        List<KisiEkBilgiDetayDto> EkBilgiListesi { get; set; }
+        public string KonumAd { get; set; }
+        public List<KisiEkBilgiDetayDto> EkBilgiListesi { get; set; }
     }
 }

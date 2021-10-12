@@ -47,7 +47,7 @@ services:
     restart: always
     environment: 
      - ASPNETCORE_ENVIRONMENT=Production
-     - ConnectionStrings=User ID=user;Password=P@ssword;Server=rehber-postgresql-db;Port=5433;Database=DevelopmentRehber;Integrated Security=true;Pooling=true;
+     - ConnectionStrings=User ID=user;Password=P@ssword;Server=rehber-postgresql-db;Database=DevelopmentRehber;Integrated Security=true;Pooling=true;
     ports:
       - 5010:4500
     networks: 
@@ -60,7 +60,7 @@ services:
     restart: always
     environment: 
      - ASPNETCORE_ENVIRONMENT=Production
-     - ConnectionStrings=Server=localhost;Database=DevelopmentRapor;User ID=sa;Password=P@ssword
+     - ConnectionStrings=Server=rapor-mssql-db;Database=DevelopmentRapor;User ID=sa;Password=P@ssword
      - RabbitMQ_HostName=rehber-rabbitmq
      - RabbitMQ_VirtualHost=/
      - RabbitMQ_UserName=user

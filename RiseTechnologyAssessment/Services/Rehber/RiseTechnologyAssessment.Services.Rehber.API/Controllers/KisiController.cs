@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using RiseTechnologyAssessment.Services.Rehber.API.Business.Abstract;
 using RiseTechnologyAssessment.Services.Rehber.API.Models.Dto;
 
 namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
@@ -8,45 +8,82 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Controllers
     [ApiController]
     public class KisiController : ControllerBase
     {
-        //Todo Temel CRUD İşlemleri yapılacak
+        private readonly IKisiService _kisiService;
+        public KisiController(IKisiService kisiService)
+        {
+            _kisiService = kisiService;
+        }
         [HttpPost]
-        public void Ekle([FromBody] KisiOlusturDto model)
+        public IActionResult Ekle([FromBody] KisiOlusturDto model)
         {
+            var result = _kisiService.KisiOlustur(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
-
         [HttpDelete("{id}")]
-        public void Sil(int id)
+        public IActionResult Sil(int id)
         {
-
+            var result = _kisiService.KisiSil(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
         }
 
         [HttpPost]
-        public void IletisimBilgisiEkle([FromBody] KisiEkBilgiOlusturDto model)
+        public IActionResult IletisimBilgisiEkle([FromBody] KisiEkBilgiOlusturDto model)
         {
-        }
+            var result = _kisiService.KisiBilgisiOlustur(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
 
+        }
         [HttpDelete("{id}")]
-        public void IletisimBilgisiSil(int id)
+        public IActionResult IletisimBilgisiSil(int id)
         {
-
+            var result = _kisiService.KisiEkBilgiSil(id);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
         }
-
-
         [HttpGet]
-        public IEnumerable<KisiListDto> Listele()
+        public IActionResult Listele()
         {
-            return new List<KisiListDto>() { };
+            var result = _kisiService.Listele();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
         }
-
-
         [HttpGet("{id}")]
-        public KisiDetayDto Detay(int id)
+        public IActionResult Detay(int id)
         {
-            return new KisiDetayDto() { };
+            var result = _kisiService.Detay(id);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
         }
-
-        //Todo Consumer projesinin ihtiyaç duyacağı "KonumaGoreRehberVerileri" isimli Endpoint Eklenecek.
-
-
+        [HttpGet("{raporid}/{konumId}")]
+        public IActionResult KonumaGoreRehberVerileri(int raporId, int konumId)
+        {
+            var result = _kisiService.KonumaGoreRehberVerileri(raporId, konumId);
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
     }
 }

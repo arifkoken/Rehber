@@ -18,7 +18,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgi", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.EkBilgi", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,6 +35,9 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.Property<int>("KisiId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("SilindiMi")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EkBilgiTuruId");
@@ -44,7 +47,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.ToTable("EkBilgi");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgiTuru", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.EkBilgiTuru", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +64,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.ToTable("EkBilgiTuru");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.Kisi", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Kisi", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,6 +84,9 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.Property<int>("KonumId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("SilindiMi")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Soyad")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -93,7 +99,7 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.ToTable("Kisi");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.Konum", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Konum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,15 +117,15 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.ToTable("Konum");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgi", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.EkBilgi", b =>
                 {
-                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgiTuru", "EkBilgiTuruNavigation")
+                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.EkBilgiTuru", "EkBilgiTuruNavigation")
                         .WithMany("EkBilgis")
                         .HasForeignKey("EkBilgiTuruId")
                         .HasConstraintName("FK_IletisimBilgisi_IletisimBilgisiTuru")
                         .IsRequired();
 
-                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Db.Kisi", "Kisi")
+                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Kisi", "Kisi")
                         .WithMany("EkBilgis")
                         .HasForeignKey("KisiId")
                         .HasConstraintName("FK_IletisimBilgisi_Kisi")
@@ -130,9 +136,9 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.Navigation("Kisi");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.Kisi", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Kisi", b =>
                 {
-                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Db.Konum", "Konum")
+                    b.HasOne("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Konum", "Konum")
                         .WithMany("Kisis")
                         .HasForeignKey("KonumId")
                         .HasConstraintName("FK_Kisi_Konum")
@@ -141,17 +147,17 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Migrations
                     b.Navigation("Konum");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.EkBilgiTuru", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.EkBilgiTuru", b =>
                 {
                     b.Navigation("EkBilgis");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.Kisi", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Kisi", b =>
                 {
                     b.Navigation("EkBilgis");
                 });
 
-            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Db.Konum", b =>
+            modelBuilder.Entity("RiseTechnologyAssessment.Services.Rehber.API.Models.Db.Konum", b =>
                 {
                     b.Navigation("Kisis");
                 });

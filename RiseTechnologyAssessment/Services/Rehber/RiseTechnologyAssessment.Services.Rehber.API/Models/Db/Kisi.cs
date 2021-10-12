@@ -10,14 +10,13 @@ namespace RiseTechnologyAssessment.Services.Rehber.API.Models.Db
         {
             EkBilgis = new HashSet<EkBilgi>();
         }
-
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
         public string Firma { get; set; }
         public int KonumId { get; set; }
-
         public virtual Konum Konum { get; set; }
         public virtual ICollection<EkBilgi> EkBilgis { get; set; }
+        public bool SilindiMi { get; set; }
     }
 }
